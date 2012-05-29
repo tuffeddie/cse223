@@ -72,10 +72,12 @@ public class EpidemicSystem {
 		}
 	}
 	public Node search( Node node, int patient ) {
-		if( node == null ) return null;
-		if( node.patient < patient) return search( node.left, patient);
-		if( node.patient > patient) return search( node.right, patient);
-		else return node;
+		while( node.patient != patient && node != null ) {
+            		if( patient < node.patient ) node = node.left;
+            		else if( patient > node.patient ) node = node.right;
+            		else node = node.right;
+            		return node;
+            	}
 	}
 	
 		public boolean delete(int value) {
