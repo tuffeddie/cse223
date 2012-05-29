@@ -76,8 +76,8 @@ public class EpidemicSystem {
             		if( patient < node.patient ) node = node.left;
             		else if( patient > node.patient ) node = node.right;
             		else node = node.right;
-            		return node;
-            	}
+		}
+            	return node;
 	}
 	
 		public boolean delete(int value) {
