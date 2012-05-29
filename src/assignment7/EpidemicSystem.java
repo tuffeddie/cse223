@@ -80,7 +80,12 @@ public class EpidemicSystem {
             	return node;
 	}
 	
-		public boolean delete(int value) {
+	public boolean inTree( Node node, int patient ) {
+		if( search(node, patient) != null) return true;
+		return false;
+	}
+	
+	public boolean delete(int value) {
             if (root == null)
                   return false;
             else {
