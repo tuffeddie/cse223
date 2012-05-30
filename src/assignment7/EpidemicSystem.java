@@ -141,25 +141,4 @@ public class EpidemicSystem {
         }
         return status;
 }
-	
-	public static void main( String[] agrs) {
-		new EpidemicSystem().run();
-	}
-	
-	public void run() {
-		Node root = new Node(10);
-		this.root = root;
-		insert(root, 6);
-		insert(root, 9);
-		insert(root, 15);
-		insert(root, 20);
-		insert(root, 2);
-		insert(root, 5);
-		insert(root, 9);
-		insert(root, 18);
-		insert(root, 19);
-		printInOrder(root);
-		delete(15);
-		printInOrder(root);
-	}
 }
