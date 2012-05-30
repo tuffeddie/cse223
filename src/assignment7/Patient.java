@@ -10,7 +10,7 @@ public class Patient {
 	public String condition;
 	public int urgencyLevel;
 	
-	public Patient(double weight, double height){
+	public Patient(double height, double weight){
 		this.weight = weight;
 		this.height = height;
 	}
