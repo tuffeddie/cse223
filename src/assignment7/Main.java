@@ -43,24 +43,32 @@ public class Main {
 	}
 	
 	private static void mainMenu(String sortType, EpidemicSystem es) {
-		System.out.printf("Now what do you want to do?:\n(1): search for patient\n(2): admit patient\n(3): discharge patient\n(4): resort tree\n(5): leave hospital");
-		int option;
-		while ( true ){
-			temp = in.nextLine();
-			if(!isNumber(temp)) continue;
-			option = Integer.parseInt(temp);
-			if(option != 1 && option != 2 && option != 3 && option != 4 && option != 5) continue;
-			break;
-		}
-		
-		switch(option) {
-		case 1: 
-			searchForPatient(sortType, es);
-			break;
-		case 2: break;
-		case 3: break;
-		case 4: break;
-		case 5: return;
+		while(true){
+			System.out.printf("\nNow what do you want to do?:\n(1): search for patient\n(2): admit patient\n(3): discharge patient\n(4): resort tree\n(5): leave hospital");
+			int option;
+			while ( true ){
+				temp = in.nextLine();
+				if(!isNumber(temp)) continue;
+				option = Integer.parseInt(temp);
+				if(option != 1 && option != 2 && option != 3 && option != 4 && option != 5) continue;
+				break;
+			}
+			
+			switch(option) {
+			case 1: 
+				searchForPatient(sortType, es);
+				break;
+			case 2: 
+				admitPatient(sortType, es);
+				break;
+			case 3: 
+				dischargePatient(sortType, es);
+				break;
+			case 4: 
+				sendListToTree(list, es);
+				break;
+			case 5: return;
+			}
 		}
 	}
 	
@@ -114,17 +122,17 @@ public class Main {
 		while(true){
 			try {
 				double search = readval(300);
-				Patient patient = findPatient(es.search(root, search).patient, sortType);
-				System.out.printf("Patient's known information");
-				
+				if(es.inTree(root, search)) {
+					Patient patient = findPatient(search, sortType);
+					System.out.printf("Patient's known information\nWeight: %.2f kg\nHeight: %.2f cm", patient.getWeight(), patient.getHeight());
+				}
+				else
+					System.out.println("That patient does not exsist.");
 				break;
 			} catch (IOException e) {
 			
 			}
-		}
-		
-		
-		
+		}	
 	}
 	
 	private static Patient findPatient(double search, String sortType) {
@@ -139,6 +147,40 @@ public class Main {
 					return current;
 		}
 		return null;
+	}
+	
+	private static void admitPatient(String sortType, EpidemicSystem es) {
+		while(true){
+			try {
+				System.out.print("Enter in weight:");
+				double weight = readval(300);
+				System.out.print("Enter in height:");
+				double height = readval(300);
+				if( sortType == "weight") es.insert(root, weight);
+				else es.insert(root, height);
+				list.add(new Patient(height, weight));
+				break;
+			} catch (IOException e) {
+				
+			}
+		}
+	}
+	
+	private static void dischargePatient(String sortType, EpidemicSystem es) {
+		while(true){
+			try {
+				System.out.print("Enter in weight:");
+				double weight = readval(300);
+				System.out.print("Enter in height:");
+				double height = readval(300);
+				if( sortType == "weight") es.delete(weight);
+				else es.delete(height);
+				list.remove(findPatient(height, sortType));
+				break;
+			} catch (IOException e) {
+				
+			}
+		}
 	}
 	
 	public static double readval(double check2) throws IOException {
