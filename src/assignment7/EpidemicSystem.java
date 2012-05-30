@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 
 public class EpidemicSystem {
 	Node root = null;
-	
+
 	static class Node {
 		Node left;
 		Node right;
@@ -75,7 +75,7 @@ public class EpidemicSystem {
 			}
 		}
 	}
-	
+
 	public Node search( Node node, double patient ) {
 		while( node.patient != patient && node != null ) {
 			if( patient < node.patient ) node = node.left;
