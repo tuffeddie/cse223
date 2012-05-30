@@ -13,7 +13,7 @@ public class Main {
 		list.add(new Patient(160, 72.7));
 		list.add(new Patient(178, 82.7));
 		list.add(new Patient(167, 76.9));
-		list.add(new Patient(177, 802.0));
+		list.add(new Patient(177, 82.0));
 		list.add(new Patient(156, 79.3));
 		list.add(new Patient(180, 76.4));
 		list.add(new Patient(176, 78.9));
