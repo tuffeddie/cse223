@@ -27,6 +27,7 @@ public class Main {
 		list.add(new Patient(155, 76.7));
 		list.add(new Patient(190, 78.8));
 		
+		
 		EpidemicSystem es = new EpidemicSystem();
 		while( true ) {
 			sendListToTree(list, es);
