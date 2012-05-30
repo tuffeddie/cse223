@@ -1,5 +1,9 @@
 package assignment7;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class EpidemicSystem {
 	Node root = null;
 
@@ -109,6 +113,34 @@ public class EpidemicSystem {
 			printInOrder(node.right);
 		}
 	}
+	
+	public int readval(int check2) throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        int check1 = 0;
+        boolean uix = true;
+        int status = -1;
+        while (uix){
+        	try{				// Reads the user input. If input is not between the values, then it re-prompts the user for input
+        		status = Integer.parseInt(input.readLine());
+                uix = false;
+                if (status < check1 || status > check2){
+                    uix = true;
+                    System.out.println("_Incorrect value: please input a double (between " + check1 + " and " + check2 + ")");
+                    System.out.println("");
+                    continue;
+                }
+        	}catch (NumberFormatException nos){
+                    System.out.println("_Incorrect value: please input an integer");
+                    uix = true;
+                    System.out.println("");
+                }
+                
+        }
+        if (status == -1){
+        	throw new Error("##########ERROR IN READVAL1 METHOD, QUITTING PROGRAM##########");
+        }
+        return status;
+}
 	
 	public static void main( String[] agrs) {
 		new EpidemicSystem().run();
