@@ -100,6 +100,18 @@ public class EpidemicSystem {
 				return root.delete(value, null);
 			}
 		}
+	public Node search( Node node, int patient ) {
+		while( node.patient != patient && node != null ) {
+            		if( patient < node.patient ) node = node.left;
+            		else if( patient > node.patient ) node = node.right;
+            		else node = node.right;
+		}
+            	return node;
+	}
+	
+	public boolean inTree( Node node, int patient ) {
+		if( search(node, patient) != null) return true;
+		return false;
 	}
 	
 	public void printInOrder(Node node) {
@@ -108,26 +120,5 @@ public class EpidemicSystem {
 			System.out.println(" Traversed " + node.patient);
 			printInOrder(node.right);
 		}
-	}
-	
-	public static void main( String[] agrs) {
-		new EpidemicSystem().run();
-	}
-	
-	public void run() {
-		Node root = new Node(10);
-		this.root = root;
-		insert(root, 6);
-		insert(root, 9);
-		insert(root, 15);
-		insert(root, 20);
-		insert(root, 2);
-		insert(root, 5);
-		insert(root, 9);
-		insert(root, 18);
-		insert(root, 19);
-		printInOrder(root);
-		delete(15);
-		printInOrder(root);
 	}
 }
