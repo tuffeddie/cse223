@@ -121,13 +121,13 @@ public class Main {
 	}
 	
 	private static void searchForPatient(String sortType, EpidemicSystem es) {
-		System.out.printf("Search for patient by %s: ", sortType);
+		System.out.printf("Search for patient by %s\n>>>", sortType);
 		while(true){
 			try {
 				double search = readval(300);
 				if(es.inTree(root, search)) {
 					Patient patient = findPatient(search, sortType);
-					System.out.printf("Patient's known information\nWeight: %.2f kg\nHeight: %.2f cm", patient.getWeight(), patient.getHeight());
+					System.out.printf("Patient's known information\nWeight: %.2f kg\nHeight: %.2f cm\n\n", patient.getWeight(), patient.getHeight());
 				}
 				else
 					System.out.println("That patient does not exsist.");

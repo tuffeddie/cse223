@@ -73,7 +73,7 @@ public class EpidemicSystem {
 	}
 
 	public Node search( Node node, double patient ) {
-		while( node.patient != patient && node != null ) {
+		while( node != null  && node.patient != patient) {
 			if( patient < node.patient ) node = node.left;
 			else if( patient > node.patient ) node = node.right;
 			else node = node.right;
