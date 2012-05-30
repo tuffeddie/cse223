@@ -13,6 +13,9 @@ import assignment7.EpidemicSystem.Node;
 
 public class Main {
 	final static List<Patient> list = new ArrayList<Patient>();
+	static String temp;
+	static Scanner in = new Scanner(System.in);
+	static Node root;
 	
 	public static void main( String[] args ) {
 		printStartUpMessage();
@@ -29,10 +32,7 @@ public class Main {
 		
 		
 		EpidemicSystem es = new EpidemicSystem();
-		while( true ) {
-			sendListToTree(list, es);
-			es.printInOrder(es.root);
-		}
+		mainMenu(sendListToTree(list, es), es);
 	}
 	
 	private static void printStartUpMessage() {
@@ -42,9 +42,29 @@ public class Main {
 		
 	}
 	
-	public static void sendListToTree( List<Patient> list, EpidemicSystem es ) {
-		String temp;
-		Scanner in = new Scanner(System.in);
+	private static void mainMenu(String sortType, EpidemicSystem es) {
+		System.out.printf("Now what do you want to do?:\n(1): search for patient\n(2): admit patient\n(3): discharge patient\n(4): resort tree\n(5): leave hospital");
+		int option;
+		while ( true ){
+			temp = in.nextLine();
+			if(!isNumber(temp)) continue;
+			option = Integer.parseInt(temp);
+			if(option != 1 && option != 2 && option != 3 && option != 4 && option != 5) continue;
+			break;
+		}
+		
+		switch(option) {
+		case 1: 
+			searchForPatient(sortType, es);
+			break;
+		case 2: break;
+		case 3: break;
+		case 4: break;
+		case 5: return;
+		}
+	}
+	
+	public static String sendListToTree( List<Patient> list, EpidemicSystem es ) {
 		int option;
 
 		while ( true ){
@@ -58,19 +78,23 @@ public class Main {
 		}
 		
 		if ( option == 0 ) {
-			Node root = new Node(list.get(0).getWeight());
+			Main.root = new Node(list.get(0).getWeight());
 			es.root = root;
 			for( Patient current : list ) {
 				es.insert(root, current.getWeight());
 			}
+			System.out.println("You have sorted the patients by weight.");
+			return "weight";
 		}
 		
 		else {
-			Node root = new Node(list.get(0).getHeight());
+			Main.root = new Node(list.get(0).getHeight());
 			es.root = root;
 			for( Patient current : list ) {
 				es.insert(root, current.getHeight());
 			}
+			System.out.println("You have sorted the patients by height.");
+			return "height";
 		}
 		
 	}
@@ -85,14 +109,46 @@ public class Main {
 		return true;
 	}
 	
-	public int readval(int check2) throws IOException {
+	private static void searchForPatient(String sortType, EpidemicSystem es) {
+		System.out.printf("Search for patient by %s: ", sortType);
+		while(true){
+			try {
+				double search = readval(300);
+				Patient patient = findPatient(es.search(root, search).patient, sortType);
+				System.out.printf("Patient's known information");
+				
+				break;
+			} catch (IOException e) {
+			
+			}
+		}
+		
+		
+		
+	}
+	
+	private static Patient findPatient(double search, String sortType) {
+		for( Patient current : list ){
+			if(sortType == "weight") {
+				if( current.getWeight() == search) {	
+					return current;
+				}
+			}
+			else 
+				if( current.getHeight() == search)
+					return current;
+		}
+		return null;
+	}
+	
+	public static double readval(double check2) throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-        int check1 = 0;
+        double check1 = 0;
         boolean uix = true;
-        int status = -1;
+        double status = -1;
         while (uix){
         	try{				// Reads the user input. If input is not between the values, then it re-prompts the user for input
-        		status = Integer.parseInt(input.readLine());
+        		status = Double.parseDouble(input.readLine());
                 uix = false;
                 if (status < check1 || status > check2){
                     uix = true;

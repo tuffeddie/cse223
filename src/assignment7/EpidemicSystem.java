@@ -1,7 +1,7 @@
 package assignment7;
 
 public class EpidemicSystem {
-	Node root = null;
+	Node root;
 
 	static class Node {
 		Node left;
