@@ -19,6 +19,19 @@ public class Main {
 	
 	public static void main( String[] args ) {
 		printStartUpMessage();
+		admitFirstPatient();		
+		EpidemicSystem es = new EpidemicSystem();
+		mainMenu(sendListToTree(list, es), es);
+	}
+	
+	private static void printStartUpMessage() {
+		System.out.printf("Doctor we need your help!!\nThe situation is very grave!!\nA mass number of patients have been admitted to the hospital;\n");
+		System.out.printf("however, all the patients have amnesia!!\nSo we have no medical data or history to go off of besides their height and weight.\n");
+		System.out.printf("We would like you to make the executive desicsion on how we should organize the patients.\n");
+		
+	}
+	
+	private static void admitFirstPatient() {
 		list.add(new Patient(160, 72.7));
 		list.add(new Patient(178, 82.7));
 		list.add(new Patient(167, 76.9));
@@ -29,17 +42,6 @@ public class Main {
 		list.add(new Patient(187, 73.1));
 		list.add(new Patient(155, 76.7));
 		list.add(new Patient(190, 78.8));
-		
-		
-		EpidemicSystem es = new EpidemicSystem();
-		mainMenu(sendListToTree(list, es), es);
-	}
-	
-	private static void printStartUpMessage() {
-		System.out.printf("Doctor we need your help!!\nThe situation is very grave!!\nA mass number of patients have been admitted to the hospital;\n");
-		System.out.printf("however, all the patients have amnesia!!\nSo we have no medical data or history to go off of besides their height and weight.\n");
-		System.out.printf("We would like you to make the executive desicsion on how we should organize the patients.\n");
-		
 	}
 	
 	private static void mainMenu(String sortType, EpidemicSystem es) {
