@@ -44,7 +44,7 @@ public class Main {
 	
 	private static void mainMenu(String sortType, EpidemicSystem es) {
 		while(true){
-			System.out.printf("\nNow what do you want to do?:\n(1): search for patient\n(2): admit patient\n(3): discharge patient\n(4): resort tree\n(5): leave hospital");
+			System.out.printf("\nNow what do you want to do?:\n(1): search for patient\n(2): admit patient\n(3): discharge patient\n(4): resort tree\n(5): traverse tree in order\n(6): leave hospital\n>>>");
 			int option;
 			while ( true ){
 				temp = in.nextLine();
@@ -67,7 +67,10 @@ public class Main {
 			case 4: 
 				sendListToTree(list, es);
 				break;
-			case 5: return;
+			case 5:
+				es.printInOrder(root, sortType);
+				break;
+			case 6: return;
 			}
 		}
 	}
@@ -77,7 +80,7 @@ public class Main {
 
 		while ( true ){
 			System.out.println("To sort by weight, enter 0");
-			System.out.println("To sort by Height, enter 1");
+			System.out.printf("To sort by Height, enter 1\n>>>");
 			temp = in.nextLine();
 			if(!isNumber(temp)) continue;
 			option = Integer.parseInt(temp);

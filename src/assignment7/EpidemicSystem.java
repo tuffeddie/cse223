@@ -102,11 +102,11 @@ public class EpidemicSystem {
 		}
 	}
 	
-	public void printInOrder(Node node) {
+	public void printInOrder(Node node, String sortType) {
 		if (node != null) {
-			printInOrder(node.left);
-			System.out.println(" Traversed " + node.patient);
-			printInOrder(node.right);
+			printInOrder(node.left, sortType);
+			System.out.println( sortType +" " + node.patient);
+			printInOrder(node.right, sortType);
 		}
 	}
 	
