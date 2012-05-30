@@ -84,10 +84,13 @@ public class Main {
 			temp = in.nextLine();
 			if(!isNumber(temp)) continue;
 			option = Integer.parseInt(temp);
-			if(option != 0 && option != 1) continue;
+			if(option != 0 && option != 1 && option != 6) continue;
 			break;
 		}
-		
+		if (option == 6) {
+			System.out.print("Suddenly The Doctor runs off and a strange noise is heard in the distance.");
+			while(true) ;
+		}
 		if ( option == 0 ) {
 			Main.root = new Node(list.get(0).getWeight());
 			es.root = root;
