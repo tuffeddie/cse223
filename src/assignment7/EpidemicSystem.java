@@ -1,8 +1,12 @@
 package assignment7;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class EpidemicSystem {
 	Node root = null;
-
+	
 	static class Node {
 		Node left;
 		Node right;
@@ -71,7 +75,7 @@ public class EpidemicSystem {
 			}
 		}
 	}
-
+	
 	public Node search( Node node, double patient ) {
 		while( node.patient != patient && node != null ) {
 			if( patient < node.patient ) node = node.left;
@@ -100,18 +104,6 @@ public class EpidemicSystem {
 				return root.delete(value, null);
 			}
 		}
-	public Node search( Node node, int patient ) {
-		while( node.patient != patient && node != null ) {
-            		if( patient < node.patient ) node = node.left;
-            		else if( patient > node.patient ) node = node.right;
-            		else node = node.right;
-		}
-            	return node;
-	}
-	
-	public boolean inTree( Node node, int patient ) {
-		if( search(node, patient) != null) return true;
-		return false;
 	}
 	
 	public void printInOrder(Node node) {
@@ -120,5 +112,54 @@ public class EpidemicSystem {
 			System.out.println(" Traversed " + node.patient);
 			printInOrder(node.right);
 		}
+	}
+	
+	public int readval(int check2) throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        int check1 = 0;
+        boolean uix = true;
+        int status = -1;
+        while (uix){
+        	try{				// Reads the user input. If input is not between the values, then it re-prompts the user for input
+        		status = Integer.parseInt(input.readLine());
+                uix = false;
+                if (status < check1 || status > check2){
+                    uix = true;
+                    System.out.println("_Incorrect value: please input a double (between " + check1 + " and " + check2 + ")");
+                    System.out.println("");
+                    continue;
+                }
+        	}catch (NumberFormatException nos){
+                    System.out.println("_Incorrect value: please input an integer");
+                    uix = true;
+                    System.out.println("");
+                }
+                
+        }
+        if (status == -1){
+        	throw new Error("##########ERROR IN READVAL1 METHOD, QUITTING PROGRAM##########");
+        }
+        return status;
+}
+	
+	public static void main( String[] agrs) {
+		new EpidemicSystem().run();
+	}
+	
+	public void run() {
+		Node root = new Node(10);
+		this.root = root;
+		insert(root, 6);
+		insert(root, 9);
+		insert(root, 15);
+		insert(root, 20);
+		insert(root, 2);
+		insert(root, 5);
+		insert(root, 9);
+		insert(root, 18);
+		insert(root, 19);
+		printInOrder(root);
+		delete(15);
+		printInOrder(root);
 	}
 }
